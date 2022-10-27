@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background: linear-gradient(150deg, rgb(235, 31, 4) 15%, #ff2b05 70%, #5513f0 94%);
+}
+
+.navbar {
+    display: flex;
+    color: #FFF;
+}
+
+.navbar__button {
+    user-select: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: .9rem;
+    padding: .3rem;
+    margin: .5rem;
+    border-bottom: 3px solid transparent;
+    transition: border-bottom .3s ease-out;
+}
+
+.navbar__button:hover {
+    cursor: pointer;
+    border-bottom: 3px solid #FFF;
+}
