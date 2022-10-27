@@ -1,4 +1,4 @@
-const { app, ipcMain } = require('electron');
+const { app, ipcMain, webContents } = require('electron');
 const events = require("./events");
 const { handleAppReady } = require("./eventHandlers/appLifecycleHandler");
 const { handleOpenImageClick, handleImageOpened } = require("./eventHandlers/openImageHandler");
@@ -19,3 +19,18 @@ ipcMain.on(events.DUPLICATE_RESP, (e, imageUrl) => handleImageDuplication(imageU
 
 ipcMain.on(events.HISTOGRAM_CLICK, () => handleHistogramClick());
 ipcMain.on(events.HISTOGRAM_DATA_RESP, (e, histogramData) => handleHistogramWindowCreation(e, histogramData));
+
+ipcMain.on(events.LINEAR_STRETCH_REQ, (e, stretchReq) => {
+    const targetWindowContents = webContents.fromId(stretchReq.targetWindowId);
+    if (targetWindowContents) targetWindowContents.send(events.LINEAR_STRETCH_REQ, stretchReq);
+});
+
+ipcMain.on(events.GAMMA_STRETCH_REQ, (e, stretchReq) => {
+    const targetWindowContents = webContents.fromId(stretchReq.targetWindowId);
+    if (targetWindowContents) targetWindowContents.send(events.GAMMA_STRETCH_REQ, stretchReq);
+});
+
+ipcMain.on(events.EQUALIZE_REQ, (e, equalizeReq) => {
+    const targetWindowContents = webContents.fromId(equalizeReq.targetWindowId);
+    if (targetWindowContents) targetWindowContents.send(events.EQUALIZE_REQ, equalizeReq);
+});

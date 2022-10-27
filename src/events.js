@@ -13,6 +13,9 @@ const DUPLICATE_RESP = "duplicate-resp";
 const HISTOGRAM_CLICK = "histogram-click";
 const HISTOGRAM_DATA_REQ = "histogram-data-req";
 const HISTOGRAM_DATA_RESP = "histogram-data-resp";
+const LINEAR_STRETCH_REQ = "linear-stretch-histogram-req";
+const GAMMA_STRETCH_REQ = "gamma-stretch-histogram-req"
+const EQUALIZE_REQ = "equalize-histogram-req";
 
 module.exports = {
     APP_READY,
@@ -29,5 +32,8 @@ module.exports = {
     DUPLICATE_RESP,
     HISTOGRAM_CLICK,
     HISTOGRAM_DATA_REQ,
-    HISTOGRAM_DATA_RESP
+    HISTOGRAM_DATA_RESP,
+    LINEAR_STRETCH_REQ,
+    GAMMA_STRETCH_REQ,
+    EQUALIZE_REQ,
 };

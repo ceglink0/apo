@@ -14,6 +14,9 @@ window.eventBus.receive(window.events.HISTOGRAM_DATA_REQ, () => {
     const histogramData = createHistogramDto(mat);
     if (histogramData) window.eventBus.send(window.events.HISTOGRAM_DATA_RESP, histogramData);
 });
+window.eventBus.receive(window.events.LINEAR_STRETCH_REQ, (stretchReq) => linearStretchImage(stretchReq));
+window.eventBus.receive(window.events.GAMMA_STRETCH_REQ, (stretchReq) => gammaStretchImage(stretchReq));
+window.eventBus.receive(window.events.EQUALIZE_REQ, (equalizeReq) => equalizeImage(equalizeReq));
 
 
 const loadImage = (imageSource, imageFormat) => {
@@ -24,7 +27,6 @@ const loadImage = (imageSource, imageFormat) => {
         const outputCanvas = getOutputCanvas();
         mat = cv.imread(img);
         const grayScale = isGrayScale(mat);
-        console.log(grayScale);
         if (grayScale) {
             cv.cvtColor(mat, mat, cv.COLOR_RGB2GRAY, 0);
         }
@@ -58,4 +60,46 @@ const isGrayScale = () => {
         }
     }
     return true;
+}
+
+const linearStretchImage = (stretchReq) => {
+    const { min, max } = stretchReq;
+    mat.data.forEach((value, index) => {
+        let newValue;
+        if (value > min && value < max) {
+            newValue = Math.round(
+                (value - min) * 255
+                / (max - min)
+            );
+        } else if (value <= min) {
+            newValue = 0;
+        } else {
+            newValue = 255;
+        }
+        mat.data[index] = newValue;
+    });
+    cv.imshow(getOutputCanvas(), mat);
+}
+const gammaStretchImage = (stretchReq) => {
+    const { factor } = stretchReq;
+    mat.data.forEach((value, index) => {
+        let newValue = Math.round(value ** (1.0 / factor));
+        if (newValue > 255) {
+            newValue = 255;
+        } else if (newValue < 0) {
+            newValue = 0;
+        }
+        mat.data[index] = newValue;
+    });
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const equalizeImage = (equalizeReq) => {
+    const { lut } = equalizeReq;
+    mat.data.forEach((value, index) => {
+        if (typeof lut[value] === "number") {
+            mat.data[index] = lut[value];
+        }
+    });
+    cv.imshow(getOutputCanvas(), mat);
 }
