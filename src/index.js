@@ -5,6 +5,7 @@ const { handleOpenImageClick, handleImageOpened } = require("./eventHandlers/ope
 const { handleSaveImageClick, handleSaveImageResponse } = require("./eventHandlers/saveImageHandler");
 const { handleDuplicateClick, handleImageDuplication } = require("./eventHandlers/duplicateHandler");
 const { handleHistogramClick, handleHistogramWindowCreation } = require("./eventHandlers/histogramHandler");
+const { openLogicalOpsWindow, applyLogicalOperation } = require("./eventHandlers/logicalOpsHandler");
 
 app.on(events.APP_READY, () => handleAppReady());
 
@@ -34,3 +35,6 @@ ipcMain.on(events.EQUALIZE_REQ, (e, equalizeReq) => {
     const targetWindowContents = webContents.fromId(equalizeReq.targetWindowId);
     if (targetWindowContents) targetWindowContents.send(events.EQUALIZE_REQ, equalizeReq);
 });
+
+ipcMain.on(events.LOGICAL_OPS_CLICK, () => openLogicalOpsWindow());
+ipcMain.on(events.APPLY_LOGICAL_OPERATION, (e, payload) => applyLogicalOperation(payload));

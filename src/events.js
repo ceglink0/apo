@@ -16,6 +16,8 @@ const HISTOGRAM_DATA_RESP = "histogram-data-resp";
 const LINEAR_STRETCH_REQ = "linear-stretch-histogram-req";
 const GAMMA_STRETCH_REQ = "gamma-stretch-histogram-req"
 const EQUALIZE_REQ = "equalize-histogram-req";
+const LOGICAL_OPS_CLICK = "logical-ops-clicked";
+const APPLY_LOGICAL_OPERATION = "apply-logical-op";
 
 module.exports = {
     APP_READY,
@@ -36,4 +38,6 @@ module.exports = {
     LINEAR_STRETCH_REQ,
     GAMMA_STRETCH_REQ,
     EQUALIZE_REQ,
+    LOGICAL_OPS_CLICK,
+    APPLY_LOGICAL_OPERATION,
 };

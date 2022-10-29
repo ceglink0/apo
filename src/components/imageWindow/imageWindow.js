@@ -17,6 +17,7 @@ window.eventBus.receive(window.events.HISTOGRAM_DATA_REQ, () => {
 window.eventBus.receive(window.events.LINEAR_STRETCH_REQ, (stretchReq) => linearStretchImage(stretchReq));
 window.eventBus.receive(window.events.GAMMA_STRETCH_REQ, (stretchReq) => gammaStretchImage(stretchReq));
 window.eventBus.receive(window.events.EQUALIZE_REQ, (equalizeReq) => equalizeImage(equalizeReq));
+window.eventBus.receive(window.events.APPLY_LOGICAL_OPERATION, (operationData) => applyLogicalOperation(operationData));
 
 
 const loadImage = (imageSource, imageFormat) => {
@@ -102,4 +103,27 @@ const equalizeImage = (equalizeReq) => {
         }
     });
     cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyLogicalOperation = (operationData) => {
+    const { filePath, operationType } = operationData;
+    const img = new Image();
+    img.src = filePath;
+    img.onload = () => {
+        const secondImageMat = cv.imread(img);
+        cv.cvtColor(secondImageMat, secondImageMat, cv.COLOR_RGBA2GRAY);
+
+        switch (operationType) {
+            case "AND":
+                cv.bitwise_and(mat, secondImageMat, mat);
+                break;
+            case "OR":
+                cv.bitwise_or(mat, secondImageMat, mat);
+                break;
+            case "XOR":
+                cv.bitwise_xor(mat, secondImageMat, mat);
+                break;
+        }
+        cv.imshow(getOutputCanvas(), mat);
+    }
 }
