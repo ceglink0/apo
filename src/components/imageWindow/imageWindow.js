@@ -17,6 +17,11 @@ window.eventBus.receive(window.events.HISTOGRAM_DATA_REQ, () => {
 window.eventBus.receive(window.events.LINEAR_STRETCH_REQ, (stretchReq) => linearStretchImage(stretchReq));
 window.eventBus.receive(window.events.GAMMA_STRETCH_REQ, (stretchReq) => gammaStretchImage(stretchReq));
 window.eventBus.receive(window.events.EQUALIZE_REQ, (equalizeReq) => equalizeImage(equalizeReq));
+window.eventBus.receive(window.events.MAKE_NEGATIVE, () => makeImageNegative());
+window.eventBus.receive(window.events.APPLY_BIN_THRESHOLD, (threshold) => applyBinaryThreshold(threshold));
+window.eventBus.receive(window.events.APPLY_BIN2_THRESHOLD, (threshold) => applyBinary2Threshold(threshold));
+window.eventBus.receive(window.events.APPLY_THRESHOLD_RETAINING_GREY_LEVELS, (threshold) => applyThresholdRetainingGreyLevels(threshold));
+
 window.eventBus.receive(window.events.APPLY_LOGICAL_OPERATION, (operationData) => applyLogicalOperation(operationData));
 
 
@@ -100,6 +105,49 @@ const equalizeImage = (equalizeReq) => {
     mat.data.forEach((value, index) => {
         if (typeof lut[value] === "number") {
             mat.data[index] = lut[value];
+        }
+    });
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const makeImageNegative = () => {
+    if (mat.channels() !== 1) return;
+    mat.data.forEach((value, index) => {
+        mat.data[index] = 255 - value;
+    });
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyBinaryThreshold = (threshold) => {
+    if (mat.channels() !== 1) return;
+    mat.data.forEach((value, index) => {
+        if (value <= threshold) {
+            mat.data[index] = 0;
+        } else {
+            mat.data[index] = 255;
+        }
+    });
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyBinary2Threshold = (threshold) => {
+    const { p1, p2 } = threshold;
+    if (mat.channels() !== 1) return;
+    mat.data.forEach((value, index) => {
+        if (p1 <= value && value <= p2) {
+            mat.data[index] = 255;
+        } else {
+            mat.data[index] = 0;
+        }
+    });
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyThresholdRetainingGreyLevels = (threshold) => {
+    if (mat.channels() !== 1) return;
+    mat.data.forEach((value, index) => {
+        if (value < threshold) {
+            mat.data[index] = 0;
         }
     });
     cv.imshow(getOutputCanvas(), mat);

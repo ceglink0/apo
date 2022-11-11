@@ -8,6 +8,10 @@ document.getElementById("duplicate-button")
     .addEventListener("click", () => sendEvent(window.events.DUPLICATE_CLICK));
 document.getElementById("histogram-button")
     .addEventListener("click", () => sendEvent(window.events.HISTOGRAM_CLICK));
+document.getElementById("make-negative")
+    .addEventListener("click", () => sendEvent(window.events.MAKE_NEGATIVE));
+document.getElementById("threshold")
+    .addEventListener("click", () => sendEvent(window.events.THRESHOLD_CLICK));
 document.getElementById("logical-ops")
     .addEventListener("click", () => sendEvent(window.events.LOGICAL_OPS_CLICK));
     

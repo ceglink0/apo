@@ -16,7 +16,12 @@ const HISTOGRAM_DATA_RESP = "histogram-data-resp";
 const LINEAR_STRETCH_REQ = "linear-stretch-histogram-req";
 const GAMMA_STRETCH_REQ = "gamma-stretch-histogram-req"
 const EQUALIZE_REQ = "equalize-histogram-req";
+const MAKE_NEGATIVE = "make-negative-req";
 const LOGICAL_OPS_CLICK = "logical-ops-clicked";
+const THRESHOLD_CLICK = "threshold-click";
+const APPLY_BIN_THRESHOLD = "apply-bin-threshold";
+const APPLY_BIN2_THRESHOLD = "apply-bin2-threshold";
+const APPLY_THRESHOLD_RETAINING_GREY_LEVELS = "apply-threshold-retaining-grey-levels";
 const APPLY_LOGICAL_OPERATION = "apply-logical-op";
 
 module.exports = {
@@ -38,6 +43,11 @@ module.exports = {
     LINEAR_STRETCH_REQ,
     GAMMA_STRETCH_REQ,
     EQUALIZE_REQ,
+    MAKE_NEGATIVE,
+    THRESHOLD_CLICK,
+    APPLY_BIN_THRESHOLD, 
+    APPLY_BIN2_THRESHOLD,
+    APPLY_THRESHOLD_RETAINING_GREY_LEVELS,
     LOGICAL_OPS_CLICK,
     APPLY_LOGICAL_OPERATION,
 };
