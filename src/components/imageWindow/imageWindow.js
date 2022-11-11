@@ -23,6 +23,8 @@ window.eventBus.receive(window.events.APPLY_BIN2_THRESHOLD, (threshold) => apply
 window.eventBus.receive(window.events.APPLY_THRESHOLD_RETAINING_GREY_LEVELS, (threshold) => applyThresholdRetainingGreyLevels(threshold));
 
 window.eventBus.receive(window.events.APPLY_LOGICAL_OPERATION, (operationData) => applyLogicalOperation(operationData));
+window.eventBus.receive(window.events.APPLY_IMAGE_MATH_OPERATION, (operationData) => applyImageMathOperation(operationData));
+window.eventBus.receive(window.events.APPLY_NUMBER_MATH_OPERATION, (operationData) => applyNumberMathOperation(operationData));
 
 
 const loadImage = (imageSource, imageFormat) => {
@@ -163,15 +165,80 @@ const applyLogicalOperation = (operationData) => {
 
         switch (operationType) {
             case "AND":
-                cv.bitwise_and(mat, secondImageMat, mat);
+                mat.data.forEach((value, index) => {
+                    mat.data[index] = value & secondImageMat.data[index]
+                })
                 break;
             case "OR":
-                cv.bitwise_or(mat, secondImageMat, mat);
+                mat.data.forEach((value, index) => {
+                    mat.data[index] = value | secondImageMat.data[index]
+                })
                 break;
             case "XOR":
-                cv.bitwise_xor(mat, secondImageMat, mat);
+                mat.data.forEach((value, index) => {
+                    mat.data[index] = value ^ secondImageMat.data[index]
+                })
                 break;
         }
         cv.imshow(getOutputCanvas(), mat);
     }
+}
+
+const applyImageMathOperation = (operationData) => {
+    const { filePath, operationType } = operationData;
+    const img = new Image();
+    img.src = filePath;
+    img.onload = () => {
+        const secondImageMat = cv.imread(img);
+        cv.cvtColor(secondImageMat, secondImageMat, cv.COLOR_RGBA2GRAY);
+
+        switch (operationType) {
+            case "PLUS":
+                mat.data.forEach((value, index) => {
+                    mat.data[index] = Math.max(Math.min(value + secondImageMat.data[index], 255), 0);
+                })
+                break;
+            case "MINUS":
+                mat.data.forEach((value, index) => {
+                    mat.data[index] = Math.max(Math.min(Math.abs(value - secondImageMat.data[index]), 255), 0);
+                })
+                break;
+            case "MULTIPLY":
+                let max = 1.0;
+                mat.data.forEach((value, index) => {
+                    let newValue = (value * secondImageMat.data[index]);
+                    if (max < newValue) {
+                        max = newValue;
+                    }
+                })
+                mat.data.forEach((value, index) => {
+                    mat.data[index] = Math.max(Math.min((value * secondImageMat.data[index])/(max / 255), 255), 0);
+                })
+                break;
+        }
+        cv.imshow(getOutputCanvas(), mat);
+    }
+}
+
+const applyNumberMathOperation = (operationData) => {
+    const { numberValue, operationType } = operationData;
+
+    switch (operationType) {
+        case "PLUS":
+            mat.data.forEach((value, index) => {
+                mat.data[index] = Math.max(Math.min(numberValue + value, 255), 0);
+            })
+            break;
+        case "MINUS":
+            mat.data.forEach((value, index) => {
+                mat.data[index] = Math.max(Math.min(Math.abs(numberValue - value), 255), 0);
+            })
+            break;
+        case "MULTIPLY":
+            mat.data.forEach((value, index) => {
+                mat.data[index] = Math.max(Math.min(numberValue * value, 255), 0);
+            })
+            break;
+    }
+    cv.imshow(getOutputCanvas(), mat);
 }

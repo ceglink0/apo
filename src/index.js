@@ -6,7 +6,7 @@ const { handleOpenImageClick, handleImageOpened } = require("./eventHandlers/ope
 const { handleSaveImageClick, handleSaveImageResponse } = require("./eventHandlers/saveImageHandler");
 const { handleDuplicateClick, handleImageDuplication } = require("./eventHandlers/duplicateHandler");
 const { handleHistogramClick, handleHistogramWindowCreation } = require("./eventHandlers/histogramHandler");
-const { openLogicalOpsWindow, applyLogicalOperation } = require("./eventHandlers/logicalOpsHandler");
+const { openSinglePointOpsWindow, applyLogicalOperation, applyImageMathOperation, applyNumberMathOperation } = require("./eventHandlers/singlePointOpsHandler");
 const {
     openThresholdWindow,
     applyBinaryThreshold,
@@ -53,5 +53,7 @@ ipcMain.on(events.APPLY_BIN_THRESHOLD, (e, threshold) => applyBinaryThreshold(th
 ipcMain.on(events.APPLY_BIN2_THRESHOLD, (e, threshold) => applyBinary2Threshold(threshold));
 ipcMain.on(events.APPLY_THRESHOLD_RETAINING_GREY_LEVELS, (e, threshold) => applyThresholdRetainingGreyLevels(threshold));
 
-ipcMain.on(events.LOGICAL_OPS_CLICK, () => openLogicalOpsWindow());
+ipcMain.on(events.SINGLE_POINT_OPS_CLICK, () => openSinglePointOpsWindow());
 ipcMain.on(events.APPLY_LOGICAL_OPERATION, (e, payload) => applyLogicalOperation(payload));
+ipcMain.on(events.APPLY_IMAGE_MATH_OPERATION, (e, payload) => applyImageMathOperation(payload));
+ipcMain.on(events.APPLY_NUMBER_MATH_OPERATION, (e, payload) => applyNumberMathOperation(payload));
