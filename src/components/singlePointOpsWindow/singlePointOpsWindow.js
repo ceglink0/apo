@@ -56,15 +56,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const imagePlusBtn = document.getElementById("image-plus");
+    const imagePlusWithSaturationBtn = document.getElementById("image-plus-with-saturation");
+    const imagePlusWithoutSaturationBtn = document.getElementById("image-plus-without-saturation");
     const imageMinusBtn = document.getElementById("image-minus");
     const imageMultiplyBtn = document.getElementById("image-multiply");
 
-    imagePlusBtn.addEventListener("click", () => {
+    imagePlusWithSaturationBtn.addEventListener("click", () => {
         if (filePath) {
             window.eventBus.send(window.events.APPLY_IMAGE_MATH_OPERATION, {
                 filePath,
-                operationType: 'PLUS'
+                operationType: 'PLUS-SATURATION'
+            });
+        }
+    });
+
+    imagePlusWithoutSaturationBtn.addEventListener("click", () => {
+        if (filePath) {
+            window.eventBus.send(window.events.APPLY_IMAGE_MATH_OPERATION, {
+                filePath,
+                operationType: 'PLUS-NO-SATURATION'
             });
         }
     });

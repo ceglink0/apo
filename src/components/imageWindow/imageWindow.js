@@ -193,9 +193,38 @@ const applyImageMathOperation = (operationData) => {
         cv.cvtColor(secondImageMat, secondImageMat, cv.COLOR_RGBA2GRAY);
 
         switch (operationType) {
-            case "PLUS":
+            case "PLUS-SATURATION":
                 mat.data.forEach((value, index) => {
                     mat.data[index] = Math.max(Math.min(value + secondImageMat.data[index], 255), 0);
+                })
+                break;
+            case "PLUS-NO-SATURATION":
+                let firstMin = 0;
+                let firstMax = 255;
+                mat.data.forEach((value, index) => {
+                    if (firstMin > value) {
+                        firstMin = value;
+                    }
+                    if (firstMax < value) {
+                        firstMax = value;
+                    }
+                })
+
+                let secondMin = 0;
+                let secondMax = 255;
+                secondImageMat.data.forEach((value, index) => {
+                    if (secondMin > value) {
+                        secondMin = value;
+                    }
+                    if (secondMax < value) {
+                        secondMax = value;
+                    }
+                })
+
+                mat.data.forEach((value, index) => {
+                    let firstImageValuePart = 127 * (value - firstMin) / (firstMax - firstMin);
+                    let secondImageValuePart = 127 * (secondImageMat.data[index] - secondMin) / (secondMax - secondMin);
+                    mat.data[index] = firstImageValuePart + secondImageValuePart;
                 })
                 break;
             case "MINUS":
