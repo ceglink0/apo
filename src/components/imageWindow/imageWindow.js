@@ -26,6 +26,12 @@ window.eventBus.receive(window.events.APPLY_LOGICAL_OPERATION, (operationData) =
 window.eventBus.receive(window.events.APPLY_IMAGE_MATH_OPERATION, (operationData) => applyImageMathOperation(operationData));
 window.eventBus.receive(window.events.APPLY_NUMBER_MATH_OPERATION, (operationData) => applyNumberMathOperation(operationData));
 
+window.eventBus.receive(window.events.EDGE_DETECTION_KERNEL, (kernel) => apply2dFilter(kernel));
+window.eventBus.receive(window.events.EDGE_DETECTION_CANNY, (boundaries) => applyCannyEdgeDetection(boundaries));
+
+window.eventBus.receive(window.events.APPLY_OTSU_THRESHOLD, () => applyOtsuThreshold());
+window.eventBus.receive(window.events.APPLY_ADAPTIVE_THRESHOLD, () => applyAdaptiveThreshold());
+
 
 const loadImage = (imageSource, imageFormat) => {
     format = imageFormat;
@@ -269,5 +275,38 @@ const applyNumberMathOperation = (operationData) => {
             })
             break;
     }
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const apply2dFilter = (kernelArray) => {
+    if (mat.channels() !== 1) return;
+    let kernel = cv.matFromArray(3, 3, cv.CV_32F, kernelArray);
+    let anchor = new cv.Point(-1, -1);
+    cv.filter2D(mat, mat, -1, kernel, anchor, 0, cv.BORDER_DEFAULT);
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyCannyEdgeDetection = (boundaries) => {
+    if (mat.channels() !== 1 || !boundaries) return;
+    const { bottomBoundary, topBoundary } = boundaries;
+    cv.Canny(mat, mat, bottomBoundary, topBoundary, 3, false);
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyOtsuThreshold = () => {
+    if (mat.channels() !== 1) return;
+    cv.threshold(mat, mat, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU);
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyAdaptiveThreshold = (adaptiveThresholdType) => {
+    if (mat.channels() !== 1) return;
+    let type; 
+    if (adaptiveThresholdType === 'MEAN') {
+        type = cv.ADAPTIVE_THRESH_MEAN_C;
+    } else if (adaptiveThresholdType === 'GAUSSIAN') {
+        type = cv.ADAPTIVE_THRESH_GAUSSIAN_C;
+    }
+    cv.adaptiveThreshold(mat, 255, type, cv.THRESH_BINARY, 199, 5);
     cv.imshow(getOutputCanvas(), mat);
 }

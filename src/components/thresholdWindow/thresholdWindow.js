@@ -57,4 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
     applyThresholdRetainingGreyLevelsBtn.addEventListener("click", () => {
         window.eventBus.send(window.events.APPLY_THRESHOLD_RETAINING_GREY_LEVELS, greySliderValue);
     });
+
+    const applyOtsuThresholdBtn = document.getElementById("otsu-threshold");
+    applyOtsuThresholdBtn.addEventListener("click", () => {
+        window.eventBus.send(window.events.APPLY_OTSU_THRESHOLD);
+    });
+
+    const applyMeanAdaptiveThresholdBtn = document.getElementById("mean-adaptive-threshold");
+    applyMeanAdaptiveThresholdBtn.addEventListener("click", () => {
+        window.eventBus.send(window.events.APPLY_ADAPTIVE_THRESHOLD, "MEAN");
+    });
+
+    const applyGaussianAdaptiveThresholdBtn = document.getElementById("gaussian-adaptive-threshold");
+    applyGaussianAdaptiveThresholdBtn.addEventListener("click", () => {
+        window.eventBus.send(window.events.APPLY_ADAPTIVE_THRESHOLD, "GAUSSIAN");
+    });
 });

@@ -25,6 +25,11 @@ const APPLY_THRESHOLD_RETAINING_GREY_LEVELS = "apply-threshold-retaining-grey-le
 const APPLY_LOGICAL_OPERATION = "apply-logical-op";
 const APPLY_IMAGE_MATH_OPERATION = "apply-image-math-op";
 const APPLY_NUMBER_MATH_OPERATION = "apply-number-math-op";
+const EDGE_DETECTION_CLICK = "edge-detection-click";
+const EDGE_DETECTION_KERNEL = "edge-detection-kernel";
+const EDGE_DETECTION_CANNY = "edge-detection-canny";
+const APPLY_OTSU_THRESHOLD = "apply-otsu-threshold";
+const APPLY_ADAPTIVE_THRESHOLD = "apply-adaptive-threshold";
 
 module.exports = {
     APP_READY,
@@ -53,5 +58,10 @@ module.exports = {
     SINGLE_POINT_OPS_CLICK,
     APPLY_LOGICAL_OPERATION,
     APPLY_IMAGE_MATH_OPERATION,
-    APPLY_NUMBER_MATH_OPERATION
+    APPLY_NUMBER_MATH_OPERATION,
+    EDGE_DETECTION_CLICK,
+    EDGE_DETECTION_KERNEL,
+    EDGE_DETECTION_CANNY,
+    APPLY_OTSU_THRESHOLD,
+    APPLY_ADAPTIVE_THRESHOLD
 };

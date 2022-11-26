@@ -14,4 +14,6 @@ document.getElementById("threshold")
     .addEventListener("click", () => sendEvent(window.events.THRESHOLD_CLICK));
 document.getElementById("logical-ops")
     .addEventListener("click", () => sendEvent(window.events.SINGLE_POINT_OPS_CLICK));
+document.getElementById("edge-detection")
+    .addEventListener("click", () => sendEvent(window.events.EDGE_DETECTION_CLICK));
     

@@ -11,8 +11,11 @@ const {
     openThresholdWindow,
     applyBinaryThreshold,
     applyBinary2Threshold,
-    applyThresholdRetainingGreyLevels
+    applyThresholdRetainingGreyLevels,
+    applyOtsuThreshold,
+    applyAdaptiveThreshold
 } = require("./eventHandlers/thresholdHandler");
+const { openEdgeDetectionWindow, handleKernelBasedEdgeDetection, handleCannyEdgeDetection } = require("./eventHandlers/edgeDetectionHandler");
 
 app.on(events.APP_READY, () => handleAppReady());
 
@@ -57,3 +60,10 @@ ipcMain.on(events.SINGLE_POINT_OPS_CLICK, () => openSinglePointOpsWindow());
 ipcMain.on(events.APPLY_LOGICAL_OPERATION, (e, payload) => applyLogicalOperation(payload));
 ipcMain.on(events.APPLY_IMAGE_MATH_OPERATION, (e, payload) => applyImageMathOperation(payload));
 ipcMain.on(events.APPLY_NUMBER_MATH_OPERATION, (e, payload) => applyNumberMathOperation(payload));
+
+ipcMain.on(events.EDGE_DETECTION_CLICK, () => openEdgeDetectionWindow());
+ipcMain.on(events.EDGE_DETECTION_KERNEL, (e, kernel) => handleKernelBasedEdgeDetection(kernel));
+ipcMain.on(events.EDGE_DETECTION_CANNY, (e, boundaries) => handleCannyEdgeDetection(boundaries));
+
+ipcMain.on(events.APPLY_OTSU_THRESHOLD, () => applyOtsuThreshold());
+ipcMain.on(events.APPLY_ADAPTIVE_THRESHOLD, () => applyAdaptiveThreshold());

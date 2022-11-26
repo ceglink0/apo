@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="edgeDetectionWindow.css">
+  </head>
+  <body>
+    Choose Kernel:
+
+    <h3>Sobel</h3>
+
+    <div class="kernels-container">
+        <div class="table-wrapper">
+            East
+            <table>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>-2</td>
+                    <td>0</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio" checked />
+        </div>
+        <div class="table-wrapper">
+            South-East
+            <table>
+                <tr>
+                    <td>-2</td>
+                    <td>-1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            South
+            <table>
+                <tr>
+                    <td>-1</td>
+                    <td>-2</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            South-West
+            <table>
+                <tr>
+                    <td>0</td>
+                    <td>-2</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+    </div>
+
+    <div class="kernels-container">
+        <div class="table-wrapper">
+            West
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>-2</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio" checked />
+        </div>
+        <div class="table-wrapper">
+            North-West
+            <table>
+                <tr>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>-1</td>
+                    <td>-2</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            North
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>-2</td>
+                    <td>-1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            North-East
+            <table>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>-2</td>
+                    <td>-1</td>
+                    <td>0</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+    </div>
+    <br />
+
+    <h3>Prewitt</h3>
+
+    <div class="kernels-container">
+        <div class="table-wrapper">
+            East
+            <table>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio" checked />
+        </div>
+        <div class="table-wrapper">
+            South-East
+            <table>
+                <tr>
+                    <td>-1</td>
+                    <td>-1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            South
+            <table>
+                <tr>
+                    <td>-1</td>
+                    <td>-1</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            South-West
+            <table>
+                <tr>
+                    <td>0</td>
+                    <td>-1</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+    </div>
+
+    <div class="kernels-container">
+        <div class="table-wrapper">
+            West
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio" checked />
+        </div>
+        <div class="table-wrapper">
+            North-West
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>-1</td>
+                    <td>-1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            North
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>-1</td>
+                    <td>-1</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+        <div class="table-wrapper">
+            North-East
+            <table>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>-1</td>
+                    <td>-1</td>
+                    <td>0</td>
+                </tr>
+            </table>
+            <input type="radio" name="kernel-radio">
+        </div>
+    </div>
+    <br />
+    <button id="sobel-apply-button">Detect Edges</button>
+
+    <br />
+    <br />
+
+    <hr>
+    
+    <h3>Canny</h3>
+
+    <input type="text" id="bottom-boundary-input" value="50" />
+    <input type="text" id="top-boundary-input" value="150" />
+    <button id="canny-apply-button">Detect Edges</button>
+
+    <script src="edgeDetectionWindow.js" type="text/javascript"></script>
+  </body>
+</html>
