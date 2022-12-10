@@ -68,7 +68,7 @@ ipcMain.on(events.EDGE_DETECTION_KERNEL, (e, kernel) => handleKernelBasedEdgeDet
 ipcMain.on(events.EDGE_DETECTION_CANNY, (e, boundaries) => handleCannyEdgeDetection(boundaries));
 
 ipcMain.on(events.APPLY_OTSU_THRESHOLD, () => applyOtsuThreshold());
-ipcMain.on(events.APPLY_ADAPTIVE_THRESHOLD, () => applyAdaptiveThreshold());
+ipcMain.on(events.APPLY_ADAPTIVE_THRESHOLD, (e, type) => applyAdaptiveThreshold(type));
 
 ipcMain.on(events.SHARPENING_CLICK, () => openSharpeningWindow());
 ipcMain.on(events.LAPLACIAN_SHARPENING, (e, kernel) => handleLaplacianSharpening(kernel));

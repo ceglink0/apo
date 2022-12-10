@@ -6,16 +6,16 @@ document.getElementById("sobel-apply-button").addEventListener("click", () => {
     );
 });
 
-document.getElementById("canny-apply-button").addEventListener("click", () => {
-    const bottomBoundary = Number(document.getElementById("bottom-boundary-input").value);
-    const topBoundary = Number(document.getElementById("top-boundary-input").value);
-    if (areCannyBoundariesValid(bottomBoundary, topBoundary)) {
-        window.eventBus.send(window.events.EDGE_DETECTION_CANNY, {
-            bottomBoundary,
-            topBoundary
-        });
-    }
-});
+// document.getElementById("canny-apply-button").addEventListener("click", () => {
+//     const bottomBoundary = Number(document.getElementById("bottom-boundary-input").value);
+//     const topBoundary = Number(document.getElementById("top-boundary-input").value);
+//     if (areCannyBoundariesValid(bottomBoundary, topBoundary)) {
+//         window.eventBus.send(window.events.EDGE_DETECTION_CANNY, {
+//             bottomBoundary,
+//             topBoundary
+//         });
+//     }
+// });
 
 const areCannyBoundariesValid = (bottomBoundary, topBoundary) => {
     return bottomBoundary > 0 && bottomBoundary <= 255

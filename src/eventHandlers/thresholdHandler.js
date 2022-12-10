@@ -33,9 +33,9 @@ const applyOtsuThreshold = () => {
     if (activeImageWindow) activeImageWindow.webContents.send(APPLY_OTSU_THRESHOLD);
 }
 
-const applyAdaptiveThreshold = () => {
+const applyAdaptiveThreshold = (type) => {
     const activeImageWindow = getActiveImageWindow();
-    if (activeImageWindow) activeImageWindow.webContents.send(APPLY_ADAPTIVE_THRESHOLD);
+    if (activeImageWindow) activeImageWindow.webContents.send(APPLY_ADAPTIVE_THRESHOLD, type);
 }
 
 module.exports = {
