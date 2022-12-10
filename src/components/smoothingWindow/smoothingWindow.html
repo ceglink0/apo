@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="smoothingWindow.css">
+  </head>
+  <body>
+
+    <div>
+      <h3>Median Blur</h3>
+      Select the kernel size:<br />
+      <select name="median-blur-kernel-size" id="median-blur-kernel-size-select">
+        <option value="">--Please choose an option--</option>
+        <option value="3">3x3</option>
+        <option value="5">5x5</option>
+        <option value="7">7x7</option>
+        <option value="9">9x9</option>
+      </select>
+      <br />
+      <br />
+      Select the border setting:<br />
+      <select name="median-blur-border-setting" id="median-blur-border-setting-select">
+        <option value="">--Please choose an option--</option>
+        <option value="REPLICATE">Replicate (aaaaaa|abcdefgh|hhhhhh)</option>
+        <option value="REFLECT">Reflect (fedcba|abcdefgh|hgfedc)</option>
+        <option value="WRAP">Wrap (bcdefgh|abcdefgh|gfedcba)</option>
+      </select>
+      <br />
+      <br />
+      <button id="median-blur-apply-btn">Apply Median Blur</button>
+    </div>
+
+    <script src="smoothingWindow.js" type="text/javascript"></script>
+  </body>
+</html>

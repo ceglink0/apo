@@ -30,6 +30,10 @@ const EDGE_DETECTION_KERNEL = "edge-detection-kernel";
 const EDGE_DETECTION_CANNY = "edge-detection-canny";
 const APPLY_OTSU_THRESHOLD = "apply-otsu-threshold";
 const APPLY_ADAPTIVE_THRESHOLD = "apply-adaptive-threshold";
+const SHARPENING_CLICK = "sharpening-click";
+const LAPLACIAN_SHARPENING = "laplacian-sharpening";
+const SMOOTHING_CLICK = "smoothing-click";
+const MEDIAN_BLUR = "median-blur-request";
 
 module.exports = {
     APP_READY,
@@ -63,5 +67,9 @@ module.exports = {
     EDGE_DETECTION_KERNEL,
     EDGE_DETECTION_CANNY,
     APPLY_OTSU_THRESHOLD,
-    APPLY_ADAPTIVE_THRESHOLD
+    APPLY_ADAPTIVE_THRESHOLD,
+    SHARPENING_CLICK,
+    LAPLACIAN_SHARPENING,
+    SMOOTHING_CLICK,
+    MEDIAN_BLUR
 };

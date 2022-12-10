@@ -16,6 +16,8 @@ const {
     applyAdaptiveThreshold
 } = require("./eventHandlers/thresholdHandler");
 const { openEdgeDetectionWindow, handleKernelBasedEdgeDetection, handleCannyEdgeDetection } = require("./eventHandlers/edgeDetectionHandler");
+const { openSharpeningWindow, handleLaplacianSharpening } = require("./eventHandlers/sharpeningHandler");
+const { openSmoothingWindow, applyMedianBlur } = require("./eventHandlers/smoothingHandler");
 
 app.on(events.APP_READY, () => handleAppReady());
 
@@ -67,3 +69,9 @@ ipcMain.on(events.EDGE_DETECTION_CANNY, (e, boundaries) => handleCannyEdgeDetect
 
 ipcMain.on(events.APPLY_OTSU_THRESHOLD, () => applyOtsuThreshold());
 ipcMain.on(events.APPLY_ADAPTIVE_THRESHOLD, () => applyAdaptiveThreshold());
+
+ipcMain.on(events.SHARPENING_CLICK, () => openSharpeningWindow());
+ipcMain.on(events.LAPLACIAN_SHARPENING, (e, kernel) => handleLaplacianSharpening(kernel));
+
+ipcMain.on(events.SMOOTHING_CLICK, () => openSmoothingWindow());
+ipcMain.on(events.MEDIAN_BLUR, (e, settings) => applyMedianBlur(settings));

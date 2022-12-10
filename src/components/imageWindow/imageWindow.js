@@ -31,6 +31,8 @@ window.eventBus.receive(window.events.EDGE_DETECTION_CANNY, (boundaries) => appl
 
 window.eventBus.receive(window.events.APPLY_OTSU_THRESHOLD, () => applyOtsuThreshold());
 window.eventBus.receive(window.events.APPLY_ADAPTIVE_THRESHOLD, () => applyAdaptiveThreshold());
+window.eventBus.receive(window.events.LAPLACIAN_SHARPENING, (kernel) => apply2dFilter(kernel));
+window.eventBus.receive(window.events.MEDIAN_BLUR, (kernelSize, borderSetting) => applyMedianBlur(kernelSize, borderSetting));
 
 
 const loadImage = (imageSource, imageFormat) => {
@@ -275,6 +277,13 @@ const applyNumberMathOperation = (operationData) => {
             })
             break;
     }
+    cv.imshow(getOutputCanvas(), mat);
+}
+
+const applyMedianBlur = (settings) => {
+    if (mat.channels() !== 1) return;
+    const { kernelSize, borderSetting } = settings;
+    cv.medianBlur(mat, mat, kernelSize);
     cv.imshow(getOutputCanvas(), mat);
 }
 

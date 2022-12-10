@@ -16,4 +16,7 @@ document.getElementById("logical-ops")
     .addEventListener("click", () => sendEvent(window.events.SINGLE_POINT_OPS_CLICK));
 document.getElementById("edge-detection")
     .addEventListener("click", () => sendEvent(window.events.EDGE_DETECTION_CLICK));
-    
+document.getElementById("smoothing")
+    .addEventListener("click", () => sendEvent(window.events.SMOOTHING_CLICK));
+document.getElementById("sharpening")
+    .addEventListener("click", () => sendEvent(window.events.SHARPENING_CLICK));

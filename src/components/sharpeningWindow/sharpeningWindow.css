@@ -1,0 +1,24 @@
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+.kernels-container {
+    margin-top: 10px;
+    display: flex;
+}
+
+.table-wrapper {
+    margin-right: 15px;
+    text-align: center;
+}
+
+.table-wrapper table {
+    border-collapse: collapse;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.table-wrapper td {
+    border: 1px solid #444;
+    padding: 5px;
+}
