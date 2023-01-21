@@ -23,7 +23,7 @@ const handleSaveImageClick = () => {
 const handleSaveImageResponse = async (imageData) => {
     const imageBuffer = await getBufferFromImageData(imageData);
     dialog.showSaveDialog(getMainWindow(), {
-        defaultPath: `${require('os').homedir()}/Desktop/image.${imageData.format}`,
+        defaultPath: `${require('os').homedir()}/Desktop/image.png`,
         filters: [{
             "name": "Images",
             "extensions": ["bmp", "tiff", "png", "jpg", "jpeg"]
@@ -38,7 +38,7 @@ const handleSaveImageResponse = async (imageData) => {
 const getBufferFromImageData = async (imageData) => {
     const pngBase64Data = imageData.url.split(',')[1];
     const pngBuffer = Buffer.from(pngBase64Data, 'base64');
-    const mimeType = mimeTypesByFileExtensions.get(imageData.format);
+    const mimeType = mimeTypesByFileExtensions.get("png");
     return await Jimp.read(pngBuffer)
         .then((image) => image.getBufferAsync(mimeType))
         .catch((err) => console.error(err));
