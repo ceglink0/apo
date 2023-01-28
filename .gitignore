@@ -87,3 +87,5 @@ typings/
 
 # Electron-Forge
 out/
+
+apo-win32-x64/

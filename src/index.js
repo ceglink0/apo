@@ -18,6 +18,7 @@ const {
 const { openEdgeDetectionWindow, handleKernelBasedEdgeDetection, handleCannyEdgeDetection } = require("./eventHandlers/edgeDetectionHandler");
 const { openSharpeningWindow, handleLaplacianSharpening } = require("./eventHandlers/sharpeningHandler");
 const { openSmoothingWindow, applyMedianBlur } = require("./eventHandlers/smoothingHandler");
+const { openProjectWindow, createImageWindow, combineImages } = require("./eventHandlers/projectHandler");
 
 app.on(events.APP_READY, () => handleAppReady());
 
@@ -75,3 +76,9 @@ ipcMain.on(events.LAPLACIAN_SHARPENING, (e, kernel) => handleLaplacianSharpening
 
 ipcMain.on(events.SMOOTHING_CLICK, () => openSmoothingWindow());
 ipcMain.on(events.MEDIAN_BLUR, (e, settings) => applyMedianBlur(settings));
+
+ipcMain.on(events.PROJECT_CLICK, () => openProjectWindow());
+ipcMain.on(events.PROJECT_CREATE_IMAGE_WINDOW, (e, filePath) => {
+    createImageWindow(filePath)
+});
+ipcMain.on(events.PROJECT_COMBINE_IMAGES, (e, filesMap) => combineImages(filesMap));

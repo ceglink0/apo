@@ -34,6 +34,9 @@ const SHARPENING_CLICK = "sharpening-click";
 const LAPLACIAN_SHARPENING = "laplacian-sharpening";
 const SMOOTHING_CLICK = "smoothing-click";
 const MEDIAN_BLUR = "median-blur-request";
+const PROJECT_CLICK = "project-click";
+const PROJECT_CREATE_IMAGE_WINDOW = "project-create-image-window";
+const PROJECT_COMBINE_IMAGES = "project-combine-images";
 
 module.exports = {
     APP_READY,
@@ -71,5 +74,8 @@ module.exports = {
     SHARPENING_CLICK,
     LAPLACIAN_SHARPENING,
     SMOOTHING_CLICK,
-    MEDIAN_BLUR
+    MEDIAN_BLUR,
+    PROJECT_CLICK,
+    PROJECT_CREATE_IMAGE_WINDOW,
+    PROJECT_COMBINE_IMAGES
 };

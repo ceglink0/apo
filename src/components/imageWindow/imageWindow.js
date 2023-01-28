@@ -34,6 +34,8 @@ window.eventBus.receive(window.events.APPLY_ADAPTIVE_THRESHOLD, (type) => applyA
 window.eventBus.receive(window.events.LAPLACIAN_SHARPENING, (kernel) => apply2dFilter(kernel));
 window.eventBus.receive(window.events.MEDIAN_BLUR, (kernelSize, borderSetting) => applyMedianBlur(kernelSize, borderSetting));
 
+window.eventBus.receive(window.events.PROJECT_COMBINE_IMAGES, (filesMap) => combineImages(filesMap).then(() => {}));
+
 
 const loadImage = (imageSource, imageFormat) => {
     format = imageFormat;
@@ -209,7 +211,7 @@ const applyImageMathOperation = (operationData) => {
             case "PLUS-NO-SATURATION":
                 let firstMin = 0;
                 let firstMax = 255;
-                mat.data.forEach((value, index) => {
+                mat.data.forEach((value, _index) => {
                     if (firstMin > value) {
                         firstMin = value;
                     }
@@ -220,7 +222,7 @@ const applyImageMathOperation = (operationData) => {
 
                 let secondMin = 0;
                 let secondMax = 255;
-                secondImageMat.data.forEach((value, index) => {
+                secondImageMat.data.forEach((value, _index) => {
                     if (secondMin > value) {
                         secondMin = value;
                     }
@@ -318,4 +320,69 @@ const applyAdaptiveThreshold = (adaptiveThresholdType) => {
     }
     cv.adaptiveThreshold(mat, mat, 255, type, cv.THRESH_BINARY, 3, 2);
     cv.imshow(getOutputCanvas(), mat);
+}
+
+// PROJECT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// PROJECT
+
+const getPixelsFromImage = async (imagePath) => {
+    let img;
+    let mat;
+    const imageLoadPromise = new Promise(resolve => {
+        img = new Image();
+        img.onload = resolve;
+        img.src = imagePath;
+    });
+    await imageLoadPromise;
+    mat = cv.imread(img)
+    cv.cvtColor(mat, mat, cv.COLOR_RGBA2GRAY);
+    return mat.data;
+}
+
+const combineImages = async (filesMap) => {
+    try {
+        let imagesPixels = [];
+        let imagesWeightFactors = [];
+        for (var i in filesMap) {
+            if (filesMap.hasOwnProperty(i) && filesMap[i].percentage && filesMap[i].percentage > 0 && filesMap[i].filePath) {
+                imagesWeightFactors.push(parseFloat(filesMap[i].percentage) / 100.0);
+                imagesPixels.push(await getPixelsFromImage(filesMap[i].filePath));
+            }
+        }
+
+        mat.data.forEach((_value, pixelIndex) => {
+            let newValueForPixel = 0;
+            for (var imageIndex in imagesPixels) {
+                newValueForPixel += imagesWeightFactors[imageIndex] * imagesPixels[imageIndex][pixelIndex];
+            }
+            mat.data[pixelIndex] = newValueForPixel;
+        });
+        
+        cv.imshow(getOutputCanvas(), mat);
+    } catch (e) {
+        console.log(JSON.stringify(e));
+    }
 }

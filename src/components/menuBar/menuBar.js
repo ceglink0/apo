@@ -20,3 +20,5 @@ document.getElementById("smoothing")
     .addEventListener("click", () => sendEvent(window.events.SMOOTHING_CLICK));
 document.getElementById("sharpening")
     .addEventListener("click", () => sendEvent(window.events.SHARPENING_CLICK));
+document.getElementById("project")
+    .addEventListener("click", () => sendEvent(window.events.PROJECT_CLICK));
